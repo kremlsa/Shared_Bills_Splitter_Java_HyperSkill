@@ -54,9 +54,27 @@ public class Menu implements CommandLineRunner {
                     case "balance":
                         System.out.print(balance(command));
                         break;
+                    case "secretsanta":
+                        secretSanta(command);
+                        break;
                 }
             }
         }
+    }
+
+    public void secretSanta(Command command) {
+        Map<String, String> pairs = new LinkedHashMap<>();
+        if (groups.containsKey(command.groupName)) {
+            for (String s : groups.get(command.groupName)) {
+
+                pairs.put(s, randomPerson);
+            }
+            groups.get(command.groupName).forEach(System.out::println);
+
+        } else {
+            System.out.println("Unknown group");
+        }
+
     }
 
     public void group(Command command) {

@@ -67,7 +67,7 @@ public class Command {
     public void checkCommand(String command, Map<String, List<String>> groups) throws commandException {
         this.groups = groups;
         if (command.matches("((19|20)\\d\\d[- \\/.](0[1-9]|1[012])[- \\/.](0[1-9]|[12][0-9]|3[01]))* *" +
-                "(?i)(borrow|repay|balance|group|purchase).*")) {
+                "(?i)(borrow|repay|balance|group|purchase|secretSanta).*")) {
 
             checkCommandArgs(command);
         } else if (command.matches("(help|exit)")) {
@@ -91,7 +91,9 @@ public class Command {
         } else if (command.matches("group (create|show|add|remove) [A-Z]+ *(\\([\\w,+\\-\\s]+\\))*")) {
             parseGroup(command);
             isOk = true;
-
+        } else if (command.matches("secretSanta *(\\([\\w,+\\-\\s]+\\))*")) {
+            secretSanta(command);
+            isOk = true;
         } else if (command.matches("((19|20)\\d\\d[- \\/.](0[1-9]|1[012])[- \\/.](0[1-9]|[12][0-9]|3[01]))* *purchase [\\w]+ [\\w]+ [0-9.]+ \\([\\w,+\\-\\s]+\\)")) {
             parsePurchase(command);
             isOk = true;
@@ -100,6 +102,11 @@ public class Command {
             error = "Invalid command argument";
             throw new commandException("Illegal command arguments");
         }
+    }
+
+    public void secretSanta(String command) {
+        this.operations = command.split(" ")[0].toLowerCase();
+        this.groupName = command.split(" ")[1];
     }
 
     public List<String> parseTeam(String input) {
