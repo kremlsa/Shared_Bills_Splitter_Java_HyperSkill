@@ -1,0 +1,6 @@
+# Project exclude paths
+/.gradle/
+/Shared Bills Splitter/task/build/
+/Shared Bills Splitter/task/out/
+/Shared Bills Splitter/task/out/production/classes/
+/Shared Bills Splitter/task/out/test/classes/
